@@ -1,56 +1,184 @@
-/* styles.css */
+/* ================== */
+/* Base: Light Mode */
+/* ================== */
+
+:root {
+  --bg-color: #fff;                /* Bootstrap bg-light */
+  --text-color: #212529;           /* Bootstrap body color */
+  --list-bg-color: #f8f9fa;        /* Bootstrap list group bg */
+  --list-border-color: #dee2e6;    /* Bootstrap border */
+  --task-complete-color: #6c757d;  /* Bootstrap text-secondary */
+  --hover-bg-color: #e9ecef;       /* Bootstrap list-group-item hover */
+  --btn-link-color: #0d6efd;       /* Bootstrap primary */
+  --checkbox-checked-bg: #0d6efd;  /* Bootstrap primary */
+  --checkbox-checked-border: #0d6efd;
+}
+
+/* ================== */
+/* Dark Mode Overrides */
+/* ================== */
+
+body.dark-mode {
+  --bg-color: #212529;             /* Bootstrap bg-dark */
+  --text-color: #f8f9fa;           /* Bootstrap text-light */
+  --list-bg-color: #343a40;        /* Bootstrap bg-secondary */
+  --list-border-color: #495057;    /* Darker border */
+  --task-complete-color: #adb5bd;  /* Bootstrap text-muted */
+  --hover-bg-color: #495057;       /* Hover color for dark */
+  --btn-link-color: #f8f9fa;       /* Light links */
+  --checkbox-checked-bg: #0d6efd;  /* Keep primary */
+  --checkbox-checked-border: #0d6efd;
+}
+
+/* ================== */
+/* General Styles */
+/* ================== */
 
 body {
-    background-color: #f8f9fa;
-    font-family: system-ui, sans-serif;
-  }
-  
-  /* List Group Items */
-  .list-group-item {
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .list-group-item:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Completed Task */
-  .task-complete {
-    text-decoration: line-through;
-    color: #999;
-    opacity: 0.6;
-    transition: all 0.3s ease;
-  }
-  
-  /* Task checkbox strike-through animation */
-  .task-transition {
-    transition: all 0.3s ease;
-  }
-  
-  /* Color tags for lists */
-  .list-color {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-  }
-  
-  /* Modal Enhancements */
-  .modal-body input,
-  .modal-body textarea,
-  .modal-body select {
-    font-size: 0.95rem;
-  }
-  
-  /* Collapsible Completed Tasks */
-  #completedTasks {
-    margin-top: 1rem;
-  }
-  
-  /* Add Task Button */
-  #addTaskBtn {
-    margin-bottom: 1rem;
-  }
-  
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+}
+
+/* List group items */
+
+.list-group-item {
+  background-color: var(--list-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--list-border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+}
+
+.list-group-item.task-complete {
+  color: var(--task-complete-color) !important;
+  text-decoration: line-through;
+}
+
+.list-group-item-action:hover,
+.list-group-item-action:focus {
+  background-color: var(--hover-bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+/* Buttons styled as links */
+
+.btn-link {
+  color: var(--btn-link-color);
+  transition: color 0.3s ease;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  color: var(--btn-link-color);
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Checkbox styles */
+
+.form-check-input {
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-check-input:checked {
+  background-color: var(--checkbox-checked-bg);
+  border-color: var(--checkbox-checked-border);
+}
+
+/* Task list item animation helper */
+
+.task-transition {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Completed tasks style */
+
+.task-complete input.form-check-input {
+  cursor: default;
+}
+
+/* Color dot for list indicator */
+
+.list-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+  border: 1px solid var(--list-border-color);
+  transition: background-color 0.3s ease;
+}
+
+/* Scrollbar styles for dark mode */
+
+body.dark-mode ::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+  background: var(--list-bg-color);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background-color: var(--checkbox-checked-bg);
+  border-radius: 10px;
+  border: 2px solid var(--list-bg-color);
+}
+
+/* Modal overrides for dark mode */
+
+body.dark-mode .modal-content {
+  background-color: var(--list-bg-color);
+  color: var(--text-color);
+  border-color: var(--list-border-color);
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .form-check-label {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-color: var(--list-border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-color: var(--btn-link-color);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Input placeholders in dark mode */
+
+body.dark-mode ::placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+
+/* Collapsible completed tasks panel */
+
+#completedTasks.collapsing {
+  transition: height 0.3s ease;
+}
+
+/* Utility */
+
+.text-muted {
+  color: var(--task-complete-color) !important;
+}
