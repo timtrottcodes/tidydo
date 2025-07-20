@@ -3,14 +3,14 @@
 /* ================== */
 
 :root {
-  --bg-color: #fff;                /* Bootstrap bg-light */
-  --text-color: #212529;           /* Bootstrap body color */
-  --list-bg-color: #f8f9fa;        /* Bootstrap list group bg */
-  --list-border-color: #dee2e6;    /* Bootstrap border */
-  --task-complete-color: #6c757d;  /* Bootstrap text-secondary */
-  --hover-bg-color: #e9ecef;       /* Bootstrap list-group-item hover */
-  --btn-link-color: #0d6efd;       /* Bootstrap primary */
-  --checkbox-checked-bg: #0d6efd;  /* Bootstrap primary */
+  --bg-color: #fff; /* Bootstrap bg-light */
+  --text-color: #212529; /* Bootstrap body color */
+  --list-bg-color: #f8f9fa; /* Bootstrap list group bg */
+  --list-border-color: #dee2e6; /* Bootstrap border */
+  --task-complete-color: #6c757d; /* Bootstrap text-secondary */
+  --hover-bg-color: #e9ecef; /* Bootstrap list-group-item hover */
+  --btn-link-color: #0d6efd; /* Bootstrap primary */
+  --checkbox-checked-bg: #0d6efd; /* Bootstrap primary */
   --checkbox-checked-border: #0d6efd;
 }
 
@@ -19,15 +19,16 @@
 /* ================== */
 
 body.dark-mode {
-  --bg-color: #212529;             /* Bootstrap bg-dark */
-  --text-color: #f8f9fa;           /* Bootstrap text-light */
-  --list-bg-color: #343a40;        /* Bootstrap bg-secondary */
-  --list-border-color: #495057;    /* Darker border */
-  --task-complete-color: #adb5bd;  /* Bootstrap text-muted */
-  --hover-bg-color: #495057;       /* Hover color for dark */
-  --btn-link-color: #f8f9fa;       /* Light links */
-  --checkbox-checked-bg: #0d6efd;  /* Keep primary */
+  --bg-color: #212529; /* Bootstrap bg-dark */
+  --text-color: #f8f9fa; /* Bootstrap text-light */
+  --list-bg-color: #343a40; /* Bootstrap bg-secondary */
+  --list-border-color: #495057; /* Darker border */
+  --task-complete-color: #adb5bd; /* Bootstrap text-muted */
+  --hover-bg-color: #495057; /* Hover color for dark */
+  --btn-link-color: #f8f9fa; /* Light links */
+  --checkbox-checked-bg: #0d6efd; /* Keep primary */
   --checkbox-checked-border: #0d6efd;
+  --btn-close-color: #fff;
 }
 
 /* ================== */
@@ -44,7 +45,12 @@ body {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-color);
 }
 
@@ -156,12 +162,21 @@ body.dark-mode .form-check-label {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+body.dark-mode .form-check-label {
+  background: transparent;
+}
+
 body.dark-mode .form-control:focus,
 body.dark-mode .form-select:focus {
   background-color: var(--bg-color);
   color: var(--text-color);
   border-color: var(--btn-link-color);
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+body.dark-mode .btn-close {
+  color: var(--btn-close-color) !important;
+  fill: var(--btn-close-color) !important;
 }
 
 /* Input placeholders in dark mode */
