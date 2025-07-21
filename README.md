@@ -2,6 +2,8 @@
 
 Tidydo - a sleek, personal task manager that helps you organize your day with ease, built with **Bootstrap 5**, **jQuery**, and **LocalStorage**.
 
+Use Tidydo online at [TimTrottCodes](https://timtrottcodes.pages.dev/)
+
 ## ✨ Features
 
 - ✅ Multiple color-coded task lists with editable titles
