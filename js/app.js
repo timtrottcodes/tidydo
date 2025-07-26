@@ -35,7 +35,7 @@ $(document).ready(function () {
     if (task.dueDate) {
       const due = new Date(task.dueDate);
       const isOverdue = due < now && !task.completed;
-      const dueLabel = due.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+      const dueLabel = due.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
       const dueClass = isOverdue ? "text-danger fw-bold" : "text-secondary";
       $icons.append(`<span title="Due: ${dueLabel}" class="bi bi-calendar-event ${dueClass}"></span>`);
     }
@@ -43,7 +43,7 @@ $(document).ready(function () {
     if (task.reminder) {
       const reminder = new Date(task.reminder);
       const isMissed = reminder < now && !task.reminderNotified && !task.completed;
-      const label = reminder.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      const label = reminder.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
       const reminderClass = isMissed ? "text-danger pulse" : "text-warning";
       $icons.append(`<span title="Reminder: ${label}" class="bi bi-bell ${reminderClass}"></span>`);
     }
@@ -93,27 +93,34 @@ $(document).ready(function () {
       container.append(item);
     });
 
-    // Dark mode toggle and import/export
+    const importBtn = $(`
+      <button id="importBtn" class="btn btn-sm btn-outline-primary">
+        <i class="bi bi-file-earmark-arrow-up me-1"></i> Import
+      </button>
+    `);
+
+    const exportBtn = $(`
+      <button id="exportBtn" class="btn btn-sm btn-outline-primary">
+        <i class="bi bi-file-earmark-arrow-down me-1"></i> Export
+      </button>
+    `);
+
     const darkModeToggle = $(`
-      <li class="list-group-item d-flex align-items-center justify-content-between">
         <span><i class="bi bi-moon-stars"></i> Dark Mode</span>
         <div class="form-check form-switch m-0">
           <input class="form-check-input" type="checkbox" id="darkModeToggle" />
         </div>
-      </li>
-    `);
-    const importBtn = $(`
-      <li class="list-group-item list-group-item-action text-primary" style="cursor:pointer;">
-        <i class="bi bi-file-earmark-arrow-up me-2" style="font-size:1.2rem;"></i> Import JSON
-      </li>
-    `);
-    const exportBtn = $(`
-      <li class="list-group-item list-group-item-action text-primary" style="cursor:pointer;">
-        <i class="bi bi-file-earmark-arrow-down me-2" style="font-size:1.2rem;"></i> Export JSON
-      </li>
     `);
 
-    container.append(darkModeToggle, importBtn, exportBtn);
+    const controlsItem = $(`
+      <li class="list-group-item d-flex align-items-center justify-content-between flex-wrap gap-3"></li>
+    `);
+
+    const left = $('<div class="d-flex align-items-center gap-2"></div>').append(importBtn, exportBtn);
+    const right = $('<div class="d-flex align-items-center gap-2"></div>').append(darkModeToggle);
+
+    controlsItem.append(left, right);
+    container.append(controlsItem);
 
     // Import and Export handlers
     importBtn.click(() => $("#importFileInput").click());
@@ -260,17 +267,20 @@ $(document).ready(function () {
     // Make task list sortable (only incomplete tasks)
     taskList.sortable({
       update: function () {
-        const newOrderTitles = taskList.children().map(function () {
-          return $(this).text().trim();
-        }).get();
+        const newOrderTitles = taskList
+          .children()
+          .map(function () {
+            return $(this).text().trim();
+          })
+          .get();
 
         const reordered = [];
-        newOrderTitles.forEach(title => {
-          const task = list.tasks.find(t => !t.completed && t.title === title);
+        newOrderTitles.forEach((title) => {
+          const task = list.tasks.find((t) => !t.completed && t.title === title);
           if (task) reordered.push(task);
         });
 
-        const completedTasks = list.tasks.filter(t => t.completed);
+        const completedTasks = list.tasks.filter((t) => t.completed);
         list.tasks = [...reordered, ...completedTasks];
         saveData();
       },
@@ -323,22 +333,24 @@ $(document).ready(function () {
     $("#repeatOption").val(task.repeat || "none");
     $("#myDayCheckbox").prop("checked", task.myDay || false);
 
-    $("#saveTaskChanges").off("click").on("click", () => {
-      task.title = $("#taskTitleInput").val();
-      task.notes = $("#taskNotes").val();
-      task.dueDate = $("#dueDate").val();
-      task.reminder = $("#reminder").val();
-      task.repeat = $("#repeatOption").val();
-      task.myDay = $("#myDayCheckbox").is(":checked");
+    $("#saveTaskChanges")
+      .off("click")
+      .on("click", () => {
+        task.title = $("#taskTitleInput").val();
+        task.notes = $("#taskNotes").val();
+        task.dueDate = $("#dueDate").val();
+        task.reminder = $("#reminder").val();
+        task.repeat = $("#repeatOption").val();
+        task.myDay = $("#myDayCheckbox").is(":checked");
 
-      if (task.myDay && !data.myDay.includes(task)) {
-        data.myDay.push(task);
-      }
+        if (task.myDay && !data.myDay.includes(task)) {
+          data.myDay.push(task);
+        }
 
-      $("#taskModal").modal("hide");
-      saveData();
-      isViewingMyDay ? renderMyDay() : renderTasks();
-    });
+        $("#taskModal").modal("hide");
+        saveData();
+        isViewingMyDay ? renderMyDay() : renderTasks();
+      });
 
     $("#taskModal").modal("show");
   }

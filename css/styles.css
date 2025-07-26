@@ -174,9 +174,20 @@ body.dark-mode .form-select:focus {
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
-body.dark-mode .btn-close {
-  color: var(--btn-close-color) !important;
-  fill: var(--btn-close-color) !important;
+.btn-close {
+  background: transparent;
+}
+.btn-close:after {
+  content: "\2715";
+  position: relative;
+  top: -10px;
+  left: 0;
+  z-index: -1;
+  color:#000;
+  font-size: 20px
+}
+body.dark-mode .btn-close:after {
+  color:#fff;
 }
 
 /* Input placeholders in dark mode */

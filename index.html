@@ -13,7 +13,7 @@
     <div class="container-fluid py-3">
       <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-2">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5>Your Lists</h5>
             <button class="btn btn-sm btn-primary" id="addListBtn">+ New List</button>
@@ -24,7 +24,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="col-md-9">
+        <div class="col-md-9 col-lg-10">
           <div id="mainView">
             <div id="noListMessage" class="text-center text-muted my-4" style="display: none">Please create or select a list to begin.</div>
 
@@ -39,7 +39,7 @@
               <ul class="list-group mb-3" id="taskList">
                 <!-- Tasks will be dynamically added here -->
               </ul>
-              <button class="btn btn-sm btn-outline-secondary" id="addTaskBtn">+ Add Task</button>
+              <button class="btn btn-sm btn-success" id="addTaskBtn">+ Add Task</button>
               <div class="mt-4">
                 <a class="btn btn-link" data-bs-toggle="collapse" id="completedToggle" href="#completedTasks" role="button">Show Completed Tasks </a>
                 <ul class="list-group collapse" id="completedTasks">
